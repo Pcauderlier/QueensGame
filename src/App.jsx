@@ -27,20 +27,26 @@ function App() {
         isBlack = checkIfBlack(h,v) === 0 ? true : false;
         if (h < 4 && isBlack){
           ligne.push({
-            piece : {type : 1 , team : 0} ,
-            color : checkIfBlack(h,v)
+
+            piece : {type : 1 , team : 0 , key : `${h}-${v}`} ,
+            color : checkIfBlack(h,v),
+            indicator : false
           })
         }
         else if (h > 5 && isBlack){
           ligne.push({
-            piece : {type : 1 , team : 1} ,
-            color : checkIfBlack(h,v)
+            piece : {type : 1 , team : 1 , key : `${h}-${v}`} ,
+            color : checkIfBlack(h,v),
+            indicator : false
+
           })
         }
         else{
           ligne.push({
             piece : {type : 0 , team : 0} ,
-            color : checkIfBlack(h,v)
+            color : checkIfBlack(h,v),
+            indicator : false
+
           })
         }
       }

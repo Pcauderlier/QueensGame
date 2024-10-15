@@ -1,18 +1,20 @@
 import { useState } from "react"
 
-export default function Case({item , grille, setGrille , position}) {
+export default function Case({item , position, activePiece , setActivePiece}) {
 //    {
 //        piece : {
 //         type : 0(vide) 1(pion) 2(reine) ,
 //         team : 0 (black) 1 (white)},
 //        },
-//         color : 0(black) 1 (white)
+//         color : 0(black) 1 (white),
+        // indicator : false
 //     }
-    const [isActive, setIsActive] = useState(false);
     const handlePawnClick = () => {
-        setIsActive(() => !isActive)
-        console.log(position)
-
+        setActivePiece({piece : item.piece , position})
+        console.log({
+            active : activePiece,
+            item : item
+        })
     }
 
   return (
@@ -20,10 +22,16 @@ export default function Case({item , grille, setGrille , position}) {
         {
             item.piece.type === 1 && (
                 <div className="w-12 h-12 rounded-full" style={{
-                    backgroundColor : item.piece.team === 0 ? "black" : "#f7d37f",
-                    borderColor : "white",
-                    borderWidth : isActive ? 4 : 0
-                    }} onClick={() => handlePawnClick()}></div>
+                backgroundColor : item.piece.team === 0 ? "black" : "#f7d37f",
+                borderColor : "white",
+                borderWidth : activePiece !== null  && activePiece.piece.key === item.piece.key ? 4 : 0
+                }} onClick={() => handlePawnClick()}></div>
+            )
+        }
+        {
+            item.piece.type === 0 && item.indicator && (
+                <div className="h-5 w-5 rounded-full bg-gray-300 opacity-75">
+                </div>
             )
         }
         
