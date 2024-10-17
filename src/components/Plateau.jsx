@@ -4,6 +4,17 @@ import Case from "./Case";
 export default function Plateau({ grille, setGrille }) {
     const [activePiece, setActivePiece] = useState(null)
     const [oldPiece , setOldPiece] = useState(null)
+    const moveActivePiece= (position) =>{
+        const newGrille = [...grille]
+        newGrille[position.h][position.v].piece = {...activePiece.piece}
+        newGrille[activePiece.position.h][activePiece.position.v].piece.type = 0
+        setGrille(newGrille)
+        setActivePiece(null)
+        console.log({
+            activePiece : activePiece,
+            position : position
+        })
+    }
 
     useEffect(() => {
         const handlePlaceHoler = (activePiece , oldPiece) => {
@@ -45,6 +56,7 @@ export default function Plateau({ grille, setGrille }) {
                         <span className="p-3 text-white">{hindex}</span> 
                         {ligne.map((item, vindex) => ( 
                             <Case 
+                                moveActivePiece={moveActivePiece}
                                 item = {item}
                                 position={{h : hindex , v : vindex}}
                                 key={`${hindex}-${vindex}`} 

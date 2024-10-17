@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function Case({item , position, activePiece , setActivePiece}) {
+export default function Case({item , position, activePiece , setActivePiece , moveActivePiece}) {
 //    {
 //        piece : {
 //         type : 0(vide) 1(pion) 2(reine) ,
@@ -16,6 +16,7 @@ export default function Case({item , position, activePiece , setActivePiece}) {
             item : item
         })
     }
+    
 
   return (
     <div className="w-[70px] h-[70px] flex justify-center items-center " style={{backgroundColor : item.color === 0 ? "#9e5013" : "#ffe68b"}}>
@@ -30,7 +31,8 @@ export default function Case({item , position, activePiece , setActivePiece}) {
         }
         {
             item.piece.type === 0 && item.indicator && (
-                <div className="h-5 w-5 rounded-full bg-gray-300 opacity-75">
+                <div className="h-7 w-7 rounded-full bg-gray-300 opacity-75"
+                onClick={() => moveActivePiece(position)}>
                 </div>
             )
         }
